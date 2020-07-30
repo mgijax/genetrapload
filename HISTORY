@@ -1,0 +1,445 @@
+TAG: genetrapload-tr11750
+DATE: 05/11/2015
+STAFF: kstone
+
+TAG: genetrapload-5-1-8-1
+DATE: 03/06/2014
+STAFF: lec
+CHANGES: TR11515
+1) merge to trunk : targetedalleleload.config.default - added COLLECTION
+
+TAG: genetrapload-tr11515-1
+DATE: 02/03/2014
+STAFF: sc
+CHANGES: TR11515
+1) targetedalleleload.config.default - added COLLECTION
+
+TAG: genetrapload-tr11515-BP
+DATE: 01/31/2014
+STAFF: sc
+CHANGES: TR11515
+
+TAG: genetrapload-5-1-4-1
+DATE: 07/01/2013
+STAFF: sc
+CHANGES: TR11422 - 
+1) genetrapload.sh - added call to seqmarker.csh
+
+TAG: genetrapload-5-1-1-1
+DATE: 11/07/2012
+STAFF: sc
+CHANGES: CFAM/B38 final tag
+
+TAG: genetrapload-5-1-0-2
+DATE: 09/26/2012
+STAFF: dbm
+CHANGES: bin/genetrapload.sh - added "-a" option to exclude running the ALO marker load
+
+TAG: genetrapload-5-5-0-1
+DATE: 08/14/2012
+STAFF:  sc
+CHANGES: TR11139 - add call to load marker location cache 
+
+TAG: genetrapload-4-4-1-3
+DATE: 09/09/2011
+STAFF:  sc
+CHANGES: TR9978
+1)  genetrapload.config.default - updated RUNTIMEOPTS to use 7G memory
+
+TAG: genetrapload-4-4-1-2
+DATE: 08/22/2011
+STAFF:  sc
+CHANGES: TR9978 
+1) genetrapload.config.default - updated RUNTIMEOPTS to use 10g memory
+
+TAG: genetrapload-4-4-1-1
+DATE: 06/21/2011
+STAFF:  sc
+CHANGES: 
+1) parseCuratorLog.sh - Added titles to each report
+2) index.html - Added reports section
+
+TAG: genetrapload-4-4-0-2
+DATE: 11/30/2010
+STAFF:  sc
+CHANGES: config.default = added new GT_SEQTAG_METHODS
+mapping "5'-RACE" to "5' RACE"
+
+TAG: genetrapload-4-4-0-1
+DATE: 09/10/2010
+STAFF:  sc
+CHANGES: 
+1) parseCuratorLog.sh - Removed two derivation reports
+2) removed some attributes reported in allele comparison report
+
+TAG: genetrapload-4-3-1-1
+DATE: 11/23/2009
+STAFF:  sc
+CHANGES: merge tr9752 to trunk
+
+TAG: genetrapload-tr9752-2
+DATE: 11/04/2009
+STAFF:  sc
+CHANGES:
+1) genetrapload.sh - fixed bug whereby best and single hits files are renamed,
+   logged into radar, and moved to another directory if and only if there is 
+   an unresolved file
+   if there are sequences in the repeat file, the load is reinvoked and
+   expects the original best and single filenames to exist.
+
+TAG: genetrapload-tr9752-1
+DATE: 09/13/2009
+STAFF:  sc
+CHANGES: Added EUCOMM seqtag method mapping to GT_SEQTAG_METHODS
+
+genetrapload-4-3-0-19
+DATE: 09/16/2009
+STAFF:  sc
+CHANGES: TR9807 - run alomrkload regardless of whether
+  there are new genetraps to load
+
+TAG: genetrapload-tr9752-BP
+DATE: 09/03/2009
+STAFF:  sc
+CHANGES: Branch Point Tag for "Load Eucomm Gene Traps into MGI"
+
+genetrapload-4-3-0-18
+DATE: 08/21/2009
+STAFF:  sc
+CHANGES: 
+1) genetrapload.sh - fixed test for unresolved file > size 0, had the 
+   test backwards
+
+TAG:  genetrapload-4-3-0-17
+TAG:  genetrapload-4-3-0-16
+DATE: 08/13/2009
+STAFF:  sc
+CHANGES: GTLF
+1) Install - create the directory for unresolved sequences in /data/downloads
+2) genetrapload.config.default - added
+a) UNRESOLVED_FILE_NAME
+b) DOWNLOADDIR
+c) FILECOUNTER - for unique filename of unresolved sequences
+3) bin/genetrapload.sh - Added logging in RADAR of unresolved ALO file 
+   (sequence records) now being created by the java loader 
+   (lib_java_dla..ALOLoader.java) and the associated single and best hits files.
+
+TAG:  genetrapload-4-3-0-15
+DATE: 08/11/2009
+STAFF:  sc
+CHANGES: Post-production release
+1) set UPDATE_MCLDERIVATION=false
+
+TAG:  genetrapload-4-3-0-14
+DATE: 07/24/2009
+STAFF:  sc
+CHANGES: Alpha	
+1) parseCuratorLog.sh - corrections
+
+TAG:  genetrapload-4-3-0-13
+TAG:  genetrapload-4-3-0-12
+DATE: 07/02/2009
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 7
+1) updateGeneTrapSeqStatus.py - made GSS seq lookup smaller
+2) genetraload.sh - mv updateGeneTrapSeqStatus call
+
+TAG:  genetrapload-4-3-0-11
+DATE: 07/01/2009
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 6
+1) truncate SEQUENCE_PROCESSED file
+
+TAG:  genetrapload-4-3-0-10
+DATE: 06/19/2009
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 6
+1) To suppport updating gene trap sequences from deleted to active:
+a) genetrapload.config.default - added SEQUENCES_PROCESSED
+b) updateGeneTrapSeqStatus.py - updates to active seqs with seq keys in 
+    SEQUENCES_PROCESSED if sequence is deleted in MGI
+c) genetrapload.sh - added call to updateGeneTrapSeqStatus.py
+d) parseCuratorLog.sh - added reporting of sequences updated
+TAG:  genetrapload-4-3-0-9
+DATE: 06/19/2009
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 5
+1) parseCuratorLog.sh - typo reporting sequences not in the database
+2) removed java source code that didn't get removed in last tag
+
+TAG:  genetrapload-4-3-0-8
+TAG:  genetrapload-4-3-0-7
+DATE: 06/17/2009
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 5
+1) removed all java source code to lib_java_dla
+2) genetrapload.config.default - removed genetrapload.jar from CLASSPATH
+3) build.xml - removed
+
+TAG:  genetrapload-4-3-0-6
+DATE: 06/17/2009
+STAFF:  sc
+CHANGES: TR7493 - Dev Build 5
+1) transmission term "Unknown" was changed to "Cell Line"
+
+TAG:  genetrapload-4-3-0-5
+DATE: 06/10/2009
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 4
+1) ALO - added isUpdate attribute, get/set methods
+2) ALOInputProcessor - added methods to get count of new ALOs
+   and get count of existing ALOs - this replaces getProcessedCt
+   which was a combined count of new and existing, added checking ALO.isUpdate
+   to determine which count to increment
+3) DBGSSGeneTrapAlleleProcessor - 
+a) set ALO.isUpdate attribute
+b) restrict searching for MCL ID in allele nomen
+4) ALOLoader - add reporting of separated counts new and existing
+5) MutantCellLine - fixed testing for null Boolean isMutant, can't happen
+
+TAG:  genetrapload-4-3-0-4
+DATE: 06/08/2009
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 4
+1) genetrapload.sh - fixed best and single catenated file names
+2) DBGSSGeneTrapInterpreter - FHCRC get mcl ID from DEFINITION
+   not /clone=
+
+TAG:  genetrapload-4-3-0-3
+TAG:  genetrapload-4-3-0-2
+DATE:
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 3
+1) genetrapload.config.default - need to define JAVA not just JAVA_HOME
+2) some logging labels updated
+
+TAG:  genetrapload-4-3-0-1
+DATE:
+STAFF:  sc
+CHANGES: TR7493 - Post Dev Build 3
+1) genetrapload.config.default 
+a) override default JAVA_HOME to java 1.6
+b) set JAVARUNTIMEOPTS to 6G
+c) don't send curation log to mgiadmin (or anyone)
+2) DBGSSGeneTrapAlleleProcessor.java - removed two unused lookups
+3) DBGSSGeneTrapFactory.java - removed getAlleleLookup method
+4) ALOLoaderAbstractFactory.java - removed getAlleleLookup method
+5) DerivationLookupBy*.java - removed unneeded getPartialInitQuery method
+6) removed extraneous imports from several classes
+
+TAG:  genetrapload-4-2-0-21
+DATE:
+STAFF:  sc
+CHANGES: TR7493 - Dev Build 3
+1) genetrapload.config.default changed MGD_SCP* vars
+   to SCP_* vars
+2) VectorEndCellLineIDExtractor - fixed bug in finding GGTC cell line
+   ID from seqTagId
+
+TAG:  genetrapload-4-2-0-20
+DATE: 05-19-2009
+STAFF:  sc
+CHANGES: TR7493
+1) debug stuff for memory issue
+
+TAG:  genetrapload-4-2-0-19
+DATE: 05-15-2009
+STAFF:  sc
+CHANGES: TR7493
+1) parseCuratorLog.sh: added report for MCL derivations updated
+   quick and dirty by deriv key from/to
+TAG:  genetrapload-4-2-0-18
+DATE: 05-15-2009
+STAFF:  sc
+CHANGES: TR7493
+1) ALOLoadCfg - added methods for "UPDATE_MCLDERIVATION"
+2) MutantCellLine - Added created/Modified by and creation/modif 
+   date attributes, to support the MCL deriv update
+3) MutantCellLineLookupByCellLineID - added setting of created/Modified
+   by and creation/modif date in MutantCellLine object, to support update
+4) MutantCellLineProcessor - added updating of MCL derivation key
+   if configured to do so
+5) ALO - added Set for MCL updates and processing of them in the 
+   sendToStream method
+6) parseCuratorLog.sh - removed some debugging stuff
+7) bin/genetrapload.sh - If we're updating the MCL derivation, then
+   drop the ALL_CellLine triggers first
+8) genetrapload.config.default - Moved repeat file settings to AFTER 
+   the setting they depend on
+
+TAG:  genetrapload-4-2-0-17
+DATE: 05-11-2009
+STAFF:  sc
+CHANGES: TR7493
+1) parseCuratorLog.sh - added more granularity to derivCompare parsing
+
+TAG:  genetrapload-4-2-0-16
+TAG:  genetrapload-4-2-0-15
+DATE: 05-07-2009
+STAFF:  sc
+CHANGES: TR7493
+1) genetrapload.config.default - Added new sequence tag method 
+2) genetrapload.sh - added more logging of outut
+3) many classes indents updated, unused imports removed
+4) DBGSSDerivationNameCreator - added strain as required in template
+5) ParentCellLineKeyLookupByParent - revised query
+6) ParentStrainLookupByParentKey - added to support using db parent cell
+   line strain in DBGSSDerivationNameCreator
+7) ALOLoader - updated reporting of counts
+8) ParentStrainLookupByParentKey - updated what is passed to super
+
+TAG:  genetrapload-4-2-0-14
+DATE: 05-04-2009
+STAFF:  sc
+CHANGES: TR7493
+1) AlleleSequenceProcessor - preprocess method changed to throw indiv 
+  exceptions including SeqNotInDBException instead of MGIException
+  so we can catch and report SeqNotInDBException
+2) DBGSSGeneTrapDerivationNameCreator - moved to app package
+3) DBGSSGeneTrapFactory.java - updated import for above
+4) ALOLoaderConstants.java added constant for "\n"
+
+TAG:  genetrapload-4-2-0-13
+DATE: 05-01-2009
+STAFF:  sc
+CHANGES: TR7493
+1) DerivationResolver.java - no longer throws ALOResolvingException
+   just reports differences as these ALOs should be loaded, not skipped
+2) DerivationProcessor - no longer throws ALOResolvingException
+3) DBGSSGeneTrapAlleleProcessor.java - check for null reference state
+   before added to ALO
+TAG:  genetrapload-4-2-0-12
+DATE: 04-28-2009
+STAFF:  sc
+CHANGES: TR7493
+1) ALOLoaderConstants.java - updated gene trap allele type from "Gene Trap" to
+   "Gene trapped"
+2) parseCuratorLog.sh - parse out entries into separate files for each issue
+
+TAG:  genetrapload-4-2-0-11
+TAG:  genetrapload-4-2-0-10
+DATE: 04-27-2009
+STAFF:  sc
+CHANGES: TR7493
+1) genetrapload.config.default - changed APP_CAT_METHOD to /usr/local/bin/cat
+
+TAG:  genetrapload-4-2-0-9
+DATE: 04-27-2009
+STAFF:  sc
+CHANGES: TR7493
+1) backed out change 1 and 2 from 4-2-0-8
+2) DBGSSGeneTrapInterpreter.java - set parent cell line and parent strain to 
+   not specified if null
+3) genetrapload.sh added call to gtcoordload and alomrkload
+
+TAG:  genetrapload-4-2-0-8
+DATE: 04-23-2009
+STAFF:  sc
+CHANGES: TR7493
+1) added genetrapload1.sh
+2) renamed genetrapload.sh to genetrapload2.sh
+3) DBGSSGeneTrapInterpreter - set parent cell line and strain
+   to 'Not Specified' if not defined in the sequence record
+
+TAG:  genetrapload-4-2-0-7
+DATE: 04-13-2009
+STAFF:  sc
+CHANGES: TR7493
+1) DBGSSGeneTrapInterpreter - set null vector name to 'Not Specified'
+2) ALOLoader - added some new record counters and reporting of them
+
+TAG:  genetrapload-4-2-0-6
+TAG:  genetrapload-4-2-0-5
+DATE: 04-13-2009
+STAFF:  sc
+CHANGES: TR7493
+1) added parseCuratorLog.sh
+2) genetrapload.sh - added3) call to parseCuratorLog.sh
+3) added:
+a) SequenceNotInDatabaseException
+b) CellLineIDInAlleleNomenException
+c) AlleleMutationProcessorException
+d) PubMedIDLookupByAlleleKey
+4) DBGSSGeneTrapAlleleProcessor - most changes address reporting
+   of diff between input and database
+5) DBGSSGeneTrapAlleleSequenceProcessor - most changes address
+   reporting
+6) genetrapload-4-2-0-5
+a) Added logging of Derivation info to validation log, this is temporary
+b) fixed a couple bugs (e.g. not setting parent cell line strain in raw
+   derivation)
+c) other changes address logging/reporting
+7) NoVectorEndException - comments only
+8) ALO
+a) uncomment seqgene trap stuff
+b) return DAO objects not clones
+9) ALOInputProcessor
+a) changed interfaces to some of the sub-processors mostly for reporting purposes
+b) added counters for looked at and processed. looked at - processed = discrepancies
+   written to curation log
+10) AlleleMutationProcessor - rearranged a bit to do reporting of differences
+    between incoming and that found in the database
+11) AlleleProcessor - changed parameters of process method
+12) AlleleSequenceProcessor - changed parameters of the process method
+13) DerivationResolver - updated to use allele type vocab for derivation type
+14) MutantCellLineProcessor - added  getCurrentIncomingMCLs method to get entire
+    MutantCellLine object
+15) fixed bugs in a couple of lookups:
+a) AlleleLookupByMutantCellLineKey
+b) AlleleLookupBySeqKey
+c) MutantCellLineLookupByCellLineID
+d) MutantCellLineLookupByAlleleKey
+16) ALOLoader - most changes to support logging of exception caught
+17) DBGSSGeneTrapDerivationNameCreator - fixed bug creating name
+
+TAG:  genetrapload-4-2-0-4
+DATE: 03-26-2009
+STAFF:  sc
+CHANGES: TR7493
+1) fixed TIGM cell line id logicalDB (needed to use "TIGM Cell Line" not 
+   "TIGM"
+2) fixed all class imports and organized them
+
+TAG:  genetrapload-4-2-0-3
+DATE: 03-23-2009
+STAFF:  sc
+CHANGES: TR7493
+1) GoodHitCountLookup.java - added
+2) SeqGeneTrapResolver.java - updated to determine and set goodHitCount
+3) genetrapload.sh - added getting input files for GoodHitCountLookupa
+4) build.xml - added
+
+TAG:  genetrapload-4-2-0-2
+DATE: 03-13-2009
+STAFF:  sc
+CHANGES: TR7493
+
+TAG:  genetrapload-4-2-0-1
+DATE: 02-19-2009
+STAFF:  sc
+CHANGES: Initial commit TR7493 
+  Gene Traps Less Filling
+Known issues:
+1) sequence references are not being associated to the allele
+2) SEQ_GeneTrap.goodHitCount is not being set
+3) needs updates for the most recent schema changes
+4) test run using TIGM only with mocked up TIGM info
+    a) one parent cell line "Lex 3.13"
+    b) parent cell Line Translation from "TIGM Gene Trap Library Lex 3.13 victr75" to "Lex 3.13"
+    c) Two TIGM vector name terms "victr75" and "victr76" 
+    d) Two Derivations, one for each vector 
+	"TIGM Gene Trap Library Lex 3.13 victr75"
+	"TIGM Gene Trap Library Lex 3.13 victr76"
+5) Also the following vocabs are mocked up and added each time I load my test db:
+    a) lab code vocab term (labname) and abbreviation (lab code)
+	CMHD    CMHD
+	EGTC    EGTC
+	ESDB    ESDB
+	FHCRC   FHCRC
+	GGTC    GGTC
+	Lexicon Genetics        Lex
+	TIGEM   TIGEM
+	TIGM    TIGM
+	SIGTR   SIGTR
+    b) translation from dbGSS raw creator to above vocab
+

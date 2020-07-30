@@ -1,0 +1,388 @@
+#format: sh
+#
+#  Configuration for genetrapload
+#
+#  This file sets up environment variables that are needed for the
+#  dbGSS Gene Trap Load
+#
+###########################################################################
+
+#
+#  If the MGICONFIG environment variable does not have a local override,
+#  use the default "live" settings.
+#
+
+if [ "${MGICONFIG}" = "" ]
+then
+    MGICONFIG=/usr/local/mgi/live/mgiconfig
+    export MGICONFIG
+fi
+
+#  establish name of master config and source it
+CONFIG_MASTER=${MGICONFIG}/master.config.sh
+
+export CONFIG_MASTER
+
+. ${CONFIG_MASTER}
+
+##############################################################################
+#
+#  ALO LOAD SPECIFIC SETTINGS
+#
+#  These settings required by ALOLoadCfg Java Configuration object
+#
+##############################################################################
+# if true update derivations for all dbGSS MCL found to be in the database
+# this will be used the first load only; it's really part of the migration
+UPDATE_MCLDERIVATION=false
+
+export UPDATE_MCLDERIVATION
+
+# load provider - used by ALOLoaderAbstractFactory.java to return
+# concrete factory
+LOAD_PROVIDER="dbGSS Gene Trap"
+
+#  load reference 
+LOAD_REFERENCE=J:141210
+
+export LOAD_PROVIDER LOAD_REFERENCE
+
+#  allele inheritance mode vocabulary term 
+ALLELE_INHERIT_MODE="Not Applicable"
+
+#  allele type vocabulary term 
+ALLELE_TYPE="Gene trapped"
+
+#  allele status vocabulary term 
+ALLELE_STATUS=Autoload
+
+# allele collection
+COLLECTION='Not Specified'
+
+export ALLELE_INHERIT_MODE ALLELE_TYPE ALLELE_STATUS COLLECTION
+
+# allele symbol template
+ALLELE_SYMBOL_TEMPLATE="Gt(~~MutCellLineID~~)~~LabCode~~"
+
+# allele name template
+ALLELE_NAME_TEMPLATE="gene trap ~~MutCellLineID~~, ~~LabName~~"
+
+export ALLELE_SYMBOL_TEMPLATE ALLELE_NAME_TEMPLATE
+
+# allele to marker associaton qualifier
+ALLELE_MARKER_ASSOC_QUAL="Not Applicable"
+
+export ALLELE_MARKER_ASSOC_QUAL
+ 
+#  cell line derivation type 
+CELLLINE_DERIV_TYPE="Gene trapped"
+
+#  cell line type 
+CELLLINE_TYPE="Embryonic Stem Cell"
+
+#  molecular mutation string 
+MOLECULAR_MUTATION="Insertion of gene trap vector"
+
+export CELLLINE_DERIV_TYPE CELLLINE_TYPE MOLECULAR_MUTATION
+
+##############################################################################
+#
+#  dbGSS GENETRAP ALO LOAD SPECIFIC SETTINGS
+#
+##############################################################################
+
+#
+#  First three required by SequenceLoadCfg Java Configuration object which is 
+#  used by GBFormatInterpreter the parent class of DBGSSGeneTrapInterpreter
+#
+
+#  SEQ_Sequence Provider controlled vocab for GenBank
+SEQ_PROVIDER=GenBank
+
+#  logical db name for GenBank 
+SEQ_LOGICALDB="Sequence DB"
+
+#  true if a virtual (computationally derived) sequence
+SEQ_VIRTUAL=false
+
+#  Note: Using GBOrganismCheckerCfg default is being used: Process only
+#  mouse sequences (no human or rat)
+
+export SEQ_PROVIDER SEQ_LOGICALDB SEQ_VIRTUAL
+
+#
+#  Next required by GeneTrapLoadCfg Java Configuration object
+#  should be replaced by a translation I think 
+#
+
+#  '|' delimited list of dbGSS sequence tag methods
+#  each member of the list is ':' delimitted. The first token the badname (in
+#  lower case) the second token is the good name
+GT_SEQTAG_METHODS="5' race:5' RACE|5'race:5' RACE|5'-RACE:5' RACE|3' race:3' RACE|3'race:3' RACE|adaptor-mediated pcr:adaptor-mediated PCR|inverse pcr:inverse PCR|plasmid rescue:plasmid rescue|5'splinkerette pcr:5'Splinkerette PCR|5' splinkerette- adaptor pcr:5'Splinkerette PCR|5' splinkerette-adaptor pcr:5'Splinkerette PCR|5SPK:5'Splinkerette PCR|3' splinkerette- adaptor pcr:3'Splinkerette PCR|3' splinkerette-adaptor pcr:3'Splinkerette PCR|3'splinkerette pcr:3'Splinkerette PCR|3SPK:3'Splinkerette PCR|ligation-mediated pcr:ligation-mediated PCR"
+
+export GT_SEQTAG_METHODS
+
+#############################################################################
+#
+#  DLA LOAD SPECIFIC SETTINGS
+#
+#  These settings required by various DLA Load Java Configuration objects
+#
+#############################################################################
+
+#
+#  Java Classes
+#
+
+# DLAStart creates an instance of this class
+DLA_LOADER=org.jax.mgi.shr.dla.loader.alo.ALOLoader
+
+#  the main application
+DLA_START=org.jax.mgi.shr.dla.loader.DLAStart
+
+#  logger factory class - allows classes to get their own loggers
+LOG_FACTORY=org.jax.mgi.shr.dla.log.DLALoggerFactory
+
+export DLA_LOADER DLA_START LOG_FACTORY
+
+#
+#  Output File Settings
+#
+
+#  full path the the logs, reports, and archive directories
+FILEDIR=${DATALOADSOUTPUT}/genbank/genetrapload
+
+LOGDIR=${FILEDIR}/logs
+RPTDIR=${FILEDIR}/reports
+OUTPUTDIR=${FILEDIR}/output
+ARCHIVEDIR=${FILEDIR}/archive
+
+export FILEDIR LOGDIR RPTDIR OUTPUTDIR ARCHIVEDIR
+
+# file of sequence keys of sequences processed by the java load
+# ./bin/updateGeneTrapSeqStatus.py will update any of these sequences
+# which are statused as deleted
+SEQUENCES_PROCESSED=${OUTPUTDIR}/sequenceKeysProcessed.txt
+
+export SEQUENCES_PROCESSED 
+
+#
+#  Input File Settings
+#
+
+#  input file directory. For this load used when APP_RADAR_INPUT=false
+INPUTDIR=...
+
+#  frameworks expects the value 'STDIN' if jobstream script pipes input to
+#  the Java application.
+INFILE_NAME=STDIN
+
+export INPUTDIR INFILE_NAME 
+
+#  GenBank sequence record String start delimiter
+#  there 7 spaces after LOCUS
+INFILE_BEGIN_DELIMITER="LOCUS       "
+
+#  GenBank sequence record String end delimiter not including sequence
+INFILE_END_DELIMITER=\nORIGIN
+
+#  true = regex matching for finding record delim is turned on
+INFILE_USE_REGEX=false
+
+export INFILE_BEGIN_DELIMITER INFILE_END_DELIMITER INFILE_USE_REGEX
+
+#  buffersize in bytes used by nio.ByteBuffer
+#  21,000,000 = ~20 MB
+INFILE_BUFFERSIZE=21000000
+
+export INFILE_BUFFERSIZE
+
+#  this load's MGI_User login. For DB tables CreatedBy and ModifiedBy column
+#  and for logging in radar jobstream table and files processed table
+JOBSTREAM=dbgss_genetrapload
+
+# get files of these types from radar if input not on command line
+# this is output of gbgtfilter
+LOAD_FILETYPE=GenBank_GTLoad
+BEST_HITS_FILETYPE=GenBank_GTLoad_Best
+SINGLE_HITS_FILETYPE=GenBank_GTLoad_Single
+
+export JOBSTREAM LOAD_FILETYPE BEST_HITS_FILETYPE SINGLE_HITS_FILETYPE 
+
+#  Complete path name of the log files
+LOG_PROC=${LOGDIR}/genetrapload.proc.log
+LOG_DIAG=${LOGDIR}/genetrapload.diag.log
+LOG_CUR=${LOGDIR}/genetrapload.cur.log
+LOG_VAL=${LOGDIR}/genetrapload.val.log
+
+export LOG_PROC LOG_DIAG LOG_CUR LOG_VAL
+
+#  send debug messages to the diagnostic log, toggle these to true as needed
+LOG_DEBUG=false
+DBDEBUG=false
+CACHE_DEBUG=false
+
+export LOG_DEBUG DBDEBUG CACHE_DEBUG 
+
+#
+#  Database Stream Settings
+# 
+
+#  this overrides the default BCP_Inline_Stream
+DLA_LOAD_STREAM=org.jax.mgi.shr.dbutils.dao.BCP_Script_Stream
+
+### do we need this? ###
+DLA_QC_STREAM=org.jax.mgi.shr.dbutils.dao.BCP_Stream
+
+#  prefix of Configuration variable names for the load database
+#  e.g. prefixes DBSERVER, DBNAME, BCP_PATH, etc
+DLA_DB_PREFIX=MGD
+
+export DLA_LOAD_STREAM DLA_QC_STREAM DLA_DB_PREFIX
+
+#
+#  BCP Manager Settings by Database
+#
+
+#  settings used to create a BCP manager for the MGD database
+MGD_BCP_PATH=${OUTPUTDIR}
+MGD_BCP_PREVENT_EXECUTE=false
+MGD_BCP_TRUNCATE_LOG=true
+MGD_BCP_DROP_INDEXES=true
+MGD_BCP_RECORD_STAMPING=false
+MGD_BCP_AUTO_FLUSH=false
+MGD_BCP_OK_TO_OVERWRITE=false
+
+export MGD_BCP_PATH MGD_BCP_PREVENT_EXECUTE MGD_BCP_TRUNCATE_LOG
+export MGD_BCP_DROP_INDEXES MGD_BCP_RECORD_STAMPING MGD_BCP_AUTO_FLUSH
+export MGD_BCP_OK_TO_OVERWRITE
+
+#  settings used to create a BCP manager for the RADAR database
+RADAR_BCP_PATH=${OUTPUTDIR}
+RADAR_BCP_PREVENT_EXECUTE=false
+RADAR_BCP_TRUNCATE_LOG=true
+RADAR_BCP_DROP_INDEXES=false
+RADAR_BCP_RECORD_STAMPING=false
+RADAR_BCP_AUTO_FLUSH=true
+RADAR_BCP_OK_TO_OVERWRITE=false
+
+export RADAR_BCP_PATH RADAR_BCP_PREVENT_EXECUTE RADAR_BCP_TRUNCATE_LOG
+export RADAR_BCP_DROP_INDEXES RADAR_BCP_RECORD_STAMPING RADAR_BCP_AUTO_FLUSH
+export RADAR_BCP_OK_TO_OVERWRITE
+
+#
+#  SQL ScriptWriter Settings for Updates
+#
+
+#  settings used to create a ScriptWriter for updates
+SCP_PATH=${MGD_BCP_PATH}
+SCP_PREVENT_EXECUTE=false
+SCP_OK_TO_OVERWRITE=false
+
+SCP_FILENAME=updates
+
+#SCP_SUFFIX=
+SCP_OUTFILENAME=updates
+#SCP_OUTSUFFIX=
+
+export SCP_PATH SCP_PREVENT_EXECUTE SCP_OK_TO_OVERWRITE
+export SCP_FILENAME SCP_SUFFIX SCP_OUTFILENAME SCP_OUTSUFFIX
+
+#############################################################################
+#
+#  INSTALL & JOBSTREAM SPECIFIC SETTINGS
+#
+#  These settings required by install or jobstream scripts 
+#
+#############################################################################
+
+#
+#  Java Settings
+#
+
+#  specify 64-bit data model, starting and max jvm heap size
+JAVARUNTIMEOPTS="-d64 -Xms7g -Xmx7g"
+
+# Java 1.6
+JAVA_HOME="/usr/mgijava6"
+
+JAVA="${JAVA_HOME}/bin/java"
+
+JAVA_LIB=${MGI_JAVALIB}/core.jar:${MGI_JAVALIB}/dbsmgd.jar:${MGI_JAVALIB}/dbsrdr.jar:${MGI_JAVALIB}/dla.jar
+
+CLASSPATH=.:${JAVA_LIB}:${COMMON_CLASSPATH}
+
+export JAVARUNTIMEOPTS JAVA_HOME JAVA JAVA_LIB CLASSPATH
+
+#  full path to input file(s). For this load used when APP_RADAR_INPUT=false
+APP_INFILES=...
+
+#  how files are piped to the application
+APP_CAT_METHOD=/usr/local/bin/cat
+
+export APP_INFILES APP_CAT_METHOD
+
+# best blat hits input file(s), full path, space delimitted
+# used when APP_RADAR_INPUT = false
+# defined in jobstream script when APP_RADAR_INPUT = true
+APP_INFILE_BEST_HITS=...
+
+# best hits single input file, full path, space delimitted
+# used when APP_RADAR_INPUT = false
+# defined in jobstream script when APP_RADAR_INPUT = true
+APP_INFILE_SINGLE_HITS=...
+
+export APP_INFILE_BEST_HITS APP_INFILE_SINGLE_HITS
+
+#
+#  Repeat File Processing Settings
+#
+
+#  process repeat file if true - required by jobstream
+APP_PROCESS_REPEATS=true
+
+#  full path to repeat file
+REPEAT_FILE_NAME=${OUTPUTDIR}/repeats.out
+
+#  rename repeat file to this name for processing - required by jobstream
+APP_REPEAT_TO_PROCESS=${REPEAT_FILE_NAME}.to.process
+
+export APP_PROCESS_REPEATS REPEAT_FILE_NAME APP_REPEAT_TO_PROCESS
+
+# 
+# Unresolved sequence settings
+#
+
+# write sequence that could not be resolved to this file
+UNRESOLVED_FILE_NAME=${OUTPUTDIR}/unresolvedRecord.out
+
+# data download directory
+DOWNLOADDIR=${DATADOWNLOADS}/ftp.ncbi.nih.gov/genetrapload/output
+
+# file counter, for file naming
+FILECOUNTER=${DOWNLOADDIR}/fileCounter
+
+export UNRESOLVED_FILE_NAME DOWNLOADDIR FILECOUNTER
+
+
+#
+#  Miscellaneous Settings
+#
+
+#  get input files from RADAR if 'true'
+APP_RADAR_INPUT=true
+
+export APP_RADAR_INPUT
+
+#  name of the load for the subject of an email notification
+MAIL_LOADNAME="Gene Trap Load"
+
+#  recipient list for mailing the curation log file (comma-separated)
+MAIL_LOG_CUR=""
+
+export MAIL_LOADNAME MAIL_LOG_CUR
+
+# installation directory for this product - for Install script
+INSTALLDIR=${GENETRAPLOAD}
+
+export INSTALLDIR

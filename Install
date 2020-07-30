@@ -1,0 +1,69 @@
+#!/bin/sh
+
+#
+# Installation script for genetrapload
+#
+# 1) cp genetrapload.config.default genetrapload.config
+#    and edit as necessary.
+#
+# 2) Install 
+#
+
+usage=Install
+
+#
+#  Function called when the install fails.
+#
+installFailed ()
+{
+    echo "Installation Failed: `date`"
+    exit 1
+}
+
+#
+#  Verify the arguments to the script, there shouldn't be any
+#
+if [ $# -ne 0 ]
+then
+    echo "Usage: ${usage}"
+    installFailed
+fi
+
+#
+# Make sure config file exists and source it
+#
+cd `dirname $0`
+LOAD_CONFIG=genetrapload.config
+
+if [ -r ${LOAD_CONFIG} ]
+then
+    . ${LOAD_CONFIG}
+else
+    echo "Cannot source configuration file: ${LOAD_CONFIG}"
+    installFailed
+fi
+
+#
+# Check to see if this is a development installation
+#
+DEV=""
+
+if [ "${INSTALL_TYPE}" = "dev" ]
+then
+    DEV="-d"
+fi
+#
+# Create the directory for unresolved sequences if it doesn't exist.
+#
+if [ ! -d ${DOWNLOADDIR} ]
+then
+    mkdir -p ${DOWNLOADDIR}
+    echo "Created ${DOWNLOADDIR}" 
+else
+    echo "Directory already exists: ${DOWNLOADDIR}"
+fi
+
+#
+# run DLAInstall
+#
+${DLAINSTALL} ${DEV}
