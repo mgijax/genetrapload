@@ -1,0 +1,32 @@
+<TITLE>
+Gene Trap Load: Data, Logs and QC Reports
+</TITLE>
+<H1>Gene Trap Load: Data, Logs and QC Reports</H1>
+<UL>
+
+<H4>Data</H4>
+<UL>
+<LI><A HREF="/data/downloads/ftp.ncbi.nih.gov/gbgtfilter/output">DBGSS ALO Load Input Files (*.seq)</A>
+</UL>
+
+<H4>Logs</H4>
+<UL>
+<LI><A HREF="/data/loads/genbank/genetrapload/logs/genetrapload.proc.log">Process Summary Log</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/logs/genetrapload.diag.log">Diagnostic Log</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/logs/genetrapload.cur.log">Curator Summary Log</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/logs/genetrapload.val.log">Data Validation Log</A>
+</UL>
+
+<H4>QC Reports</H4>
+These reports list reasons why a gene trap was not loaded. The load will attempt to load them weekly. Only when the issues are fixed will they be loaded. More detail for a given sequence tag can be found in the curation log above.
+<OL>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.cellLineIdInAlleleNomen.skip">Cell Line ID Found in an Existing Allele Symbol or Synonym</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.creatorNotFound.skip">Gene Trap Creator not Found in Database</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.derivNotResolve.skip">Derivation did not Resolve</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.resErrors.uniq.skip">Gene Traps with Other Resolving Errors</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.seqAssocWithAllele.skip">Sequence Associated with a Different Allele in the Database</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.seqAssocWithMarker.skip">Sequence Associated with a Marker in the Database</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.seqNotInMGI.skip">Sequence Object not in MGI</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.seqTagIdMissingVectorEnd.skip">Sequence Tag Vector End Information Not Found</A>
+<LI><A HREF="/data/loads/genbank/genetrapload/reports/cur.report.seqTagMethodNotFound.skip">Sequence Tag Method Not Found</A>
+</OL>
