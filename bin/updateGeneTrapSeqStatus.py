@@ -58,7 +58,7 @@ deletedList = []
 # Example: (opt)
 
 def bailout (msg):
-    print msg
+    print(msg)
     sys.exit(1)
 
 def preprocess ():
@@ -81,7 +81,7 @@ def process ():
     for line in inFile.readlines():
 	ctr = ctr + 1
 	if ctr % 10000 == 0:
-	    print "Processed %s input records" % ctr
+	    print("Processed %s input records" % ctr)
         seqKey = int(string.strip(line))
 	if seqKey in deletedList:
 	    cmds.append (updateStatement % seqKey)
@@ -103,29 +103,29 @@ def updateDatabase (cmds):
     try:
 	    db.useOneConnection(1)
 	    while cmds:
-		    print 'Current running time (secs): %s' % (time.time() - STARTTIME)
+		    print('Current running time (secs): %s' % (time.time() - STARTTIME))
 		    db.sql (cmds[:100], 'auto')
 		    cmds = cmds[100:]
 	    db.useOneConnection(0)
     except:
 	    bailout ('Failed during database updates')
 
-    print 'Processed %d updates to SEQ_Sequence._SequenceStatus_key' % total
-    print 'Total running time (secs): %s' % (time.time() - STARTTIME)
+    print('Processed %d updates to SEQ_Sequence._SequenceStatus_key' % total)
+    print('Total running time (secs): %s' % (time.time() - STARTTIME))
     return
 
 #
 # Main
 #
 
-print "Loading dbGSS sequence lookup"
+print("Loading dbGSS sequence lookup")
 preprocess ()
 
-print "Creating update commands"
+print("Creating update commands")
 cmds = process ()
 
-print "Updating database"
-print "Total updates: %s " % len(cmds)
+print("Updating database")
+print("Total updates: %s " % len(cmds))
 updateDatabase (cmds)
 
 logCur.close()
